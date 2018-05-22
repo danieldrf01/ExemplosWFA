@@ -12,6 +12,8 @@ namespace Meu_guarda_roupa
 {
     public partial class CadastroPeca : Form
     {
+        private int posicao = -1;
+
         public CadastroPeca()
         {
             InitializeComponent();
@@ -21,9 +23,11 @@ namespace Meu_guarda_roupa
             }
         }
 
-        public CadastroPeca(Peca peca)
+        public CadastroPeca(Peca peca, int posicao)
         {
             InitializeComponent();
+            this.posicao = posicao;
+
             txtNome.Text = peca.Nome;
             txtValor.Text = Convert.ToString(peca.Valor);
             cbCor.SelectedItem = peca.Cor;
@@ -114,7 +118,19 @@ namespace Meu_guarda_roupa
                 Tecido = cbTecido.SelectedItem.ToString(),
                 DataCompra = dtpDataCompra.Value
             };
-              Program.pecas.Add(peca);
+
+            if (posicao >= 0)
+            {
+                Program.pecas[posicao] = peca;
+                MessageBox.Show("Cadastro alterado com sucesso");
+            }
+
+            else
+            {
+                Program.pecas.Add(peca);
+                MessageBox.Show("Cadastro realziado com sucesso");
+            }
+                          Program.pecas.Add(peca);
               MessageBox.Show("Cadastro realizado com sucesso");
               LimparCampos();
             }
@@ -136,6 +152,7 @@ namespace Meu_guarda_roupa
         {
             Dispose();
         }
+
 
     }
 }

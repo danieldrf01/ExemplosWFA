@@ -53,14 +53,39 @@ namespace Meu_guarda_roupa
 
             int linhaSelecionada1 = dgvListaPeca.CurrentRow.Index;
             Peca peca = Program.pecas[linhaSelecionada];
-            CadastroPeca cadastroPeca = new CadastroPeca(peca);
-
+            new CadastroPeca(peca).ShowDialog();
         }
-
 
         private void btnApagar_Click(object sender, EventArgs e)
         {
+           
+            if (dgvListaPeca == null)
+            {
+                MessageBox.Show("Não tem nenhuma peça selecionada");
+                return;
+            }
 
+            int linhaSelecionada = dgvListaPeca.CurrentRow.Index;
+            Peca peca = Program.pecas[linhaSelecionada];
+
+
+            DialogResult resultado = MessageBox.Show("Dedeseja apagar" + peca.Nome + " o registro?",
+                "AVISO", MessageBoxButtons.YesNo);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Program.pecas.RemoveAt(linhaSelecionada);
+                AtualizarLista();
+                MessageBox.Show("Registro apagado com sucesso");
+            }
+            
+            else
+            {
+                MessageBox.Show("Ta salvo o seu registro jovem");
+            }
+           
+            
+            
         }
     }
 }

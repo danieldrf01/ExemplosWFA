@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Meu_guarda_roupa
 {
-    class Peca
+    public class Peca
+
     {
         public string Nome;
         public string Tipo;
